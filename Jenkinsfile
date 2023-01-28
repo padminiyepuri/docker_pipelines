@@ -19,7 +19,7 @@ pipeline {
     }
   
     parameters {
-		choice(name: 'Choice', choices: ['padminiyepuri', 'padminiyepuri'], description: 'Choice repository to build')
+		choice(name: 'Choice', choices: ['padminiyepuri/docker_pipelines', 'padminiyepuri/docker_pipelines'], description: 'Choice repository to build')
 		choice(name: 'Branch', choices: ['master', 'test'], description: 'Choice branch to build')
     }
     
