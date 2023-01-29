@@ -16,14 +16,14 @@ pipeline {
     }
   
     parameters {
-		choice(name: 'Choice', choices: ['code', 'finalcode'], description: 'Choice repository to build')
+		choice(name: 'Choice', choices: ['padminiyepuri/code', 'padminiyepuri/finalcode'], description: 'Choice repository to build')
 		choice(name: 'Branch', choices: ['master', 'test'], description: 'Choice branch to build')
     }
     
     stages {
         stage('checkout repo') {
             steps {
-    		    checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/$Branch"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "$WORKSPACE/1_folder/"], [$class: 'SubmoduleOption', disableSubmodules: true, parentCredentials: false, recursiveSubmodules: false, reference: '', timeout: 3000, trackingSubmodules: false]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "$CredentialID", url: "https://github.com/padminiyepuri/$Repo.git"]]]
+    		    checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/$Branch"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "$WORKSPACE/1_folder/"], [$class: 'SubmoduleOption', disableSubmodules: true, parentCredentials: false, recursiveSubmodules: false, reference: '', timeout: 3000, trackingSubmodules: false]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "$CredentialID", url: "https://github.com/$Repo.git"]]]
             }
         }    
 	   stage('Build code') {
