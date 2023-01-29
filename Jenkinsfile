@@ -28,7 +28,7 @@ pipeline {
         }    
 	   stage('Build code') {
 	       steps {
-	            sh 'script.sh'
+	            echo 'helloworld'
 				
 			}
 		}
