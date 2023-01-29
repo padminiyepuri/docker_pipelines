@@ -8,7 +8,7 @@ pipeline {
     
 	}
     environment {
-	    //Version="product"
+
 	    Repo="${params.Choice}"
 	    Branch="${params.Branch}"
 	    CredentialID="github_ID"
@@ -16,19 +16,19 @@ pipeline {
     }
   
     parameters {
-		choice(name: 'Choice', choices: ['padminiyepuri/docker_pipelines'], description: 'Choice repository to build')
-		choice(name: 'Branch', choices: ['master', 'dev'], description: 'Choice branch to build')
+		choice(name: 'Choice', choices: ['code', 'finalcode'], description: 'Choice repository to build')
+		choice(name: 'Branch', choices: ['master', 'test'], description: 'Choice branch to build')
     }
     
     stages {
-        stage('checkout') {
+        stage('checkout repo') {
             steps {
-    		    checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/$Branch"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "docker_pipelines"], [$class: 'SubmoduleOption', disableSubmodules: true, parentCredentials: false, recursiveSubmodules: false, reference: '', timeout: 3000, trackingSubmodules: false]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "$CredentialID", url: "https://github.com/padminiyepuri/docker_pipelines.git"]]]
+    		    checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/$Branch"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "$WORKSPACE/1_folder/"], [$class: 'SubmoduleOption', disableSubmodules: true, parentCredentials: false, recursiveSubmodules: false, reference: '', timeout: 3000, trackingSubmodules: false]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "$CredentialID", url: "https://github.com/padminiyepuri/$Repo.git"]]]
             }
         }    
 	   stage('Build code') {
 	       steps {
-	            echo 'helloworld'
+	            echo 'script.sh'
 				
 			}
 		}
